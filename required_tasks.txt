@@ -1,0 +1,168 @@
+openapi: 3.0.0
+servers: []
+info:
+  description: You have to implement these APIs in FastAPI and MongoDB tech stack as mentioned on your problem statement document.
+  version: "1.0.0"
+  title: Backend Intern Hiring Task
+
+paths:
+  /students:
+    post:
+      summary: Create Students
+      description: API to create a student in the system. All fields are mandatory and required while creating the student in the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
+                address:
+                  type: object
+                  properties:
+                    city:
+                      type: string
+                    country:
+                      type: string
+                  required: 
+                  - city
+                  - country
+              required: 
+              - name
+              - age
+              - address
+      responses:
+        201:
+          description: A JSON response sending back the ID of the newly created student record.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+    get:
+      summary: List students
+      description: An API to find a list of students. You can apply filters on this API by passing the query parameters as listed below.
+      parameters: 
+      - name: country
+        in: query
+        description: To apply filter of country. If not given or empty, this filter should be applied.
+        schema:
+          type: string
+        required: false
+      - name: age
+        in: query
+        description: Only records which have age greater than equal to the provided age should be present in the result. If not given or empty, this filter should be applied.
+        schema:
+          type: integer
+        required: false
+
+      responses:
+        200:
+          description: sample response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        age:
+                          type: integer
+                      required: 
+                      - name
+                      - age
+                  
+  /students/{id}:
+    get:
+      summary: Fetch student
+      parameters: 
+      - name: id
+        in: path
+        description: The ID of the student previously created.
+        schema:
+          type: string
+        required: true
+      responses:
+        200:
+          description: sample response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  age:
+                    type: integer
+                  address:
+                    type: object
+                    properties:
+                      city:
+                        type: string
+                      country:
+                        type: string
+                    required: 
+                    - city
+                    - country
+                required: 
+                - name
+                - age
+                - address
+    patch:
+      summary: Update student
+      description: API to update the student's properties based on information provided. Not mandatory that all information would be sent in PATCH, only what fields are sent should be updated in the Database.
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: integer
+                address:
+                  type: object
+                  properties:
+                    city:
+                      type: string
+                    country:
+                      type: string
+      responses:
+        204:
+          description: No content
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      summary: Delete student
+      parameters: 
+      - name: id
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        200:
+          description: sample response
+          content:
+            application/json:
+              schema:
+                type: object
