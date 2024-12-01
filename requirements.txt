@@ -1,2 +1,2 @@
-fastapi==0.115.5
+fastapi[standard]
 pymongo==4.10.1
