@@ -3,6 +3,7 @@ Backend Task Cosmocloud - Student Management System
 
 Welcome to the **CosmoCloud Backend**, a FastAPI-powered RESTful API designed to handle student management seamlessly. This backend is deployed on **Render** and is ready to serve!
 
+##😬There might be Cold boot/start of the server for first request.
 ## 🚀 Live Demo
 Access the live backend here (Base URL): [CosmoCloud Backend](https://cosmocloud-backend-bnq7.onrender.com)
 
